@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import ColorSlider from './Components/ColorSlider/index.jsx'
 import './style.css';
 
 const App = () => {
+
+  const [redValue, setRedValue] = useState(0);
+  const [greenValue, setGreenValue] = useState(0);
+  const [blueValue, setBlueValue] = useState(0);
+
+  let color = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
+
   return (
-    <div className="container">
-      <header>
-        <div className="logo" />
-        <h1>React webová aplikace</h1>
-      </header>
-      <main>
-        <p>
-          Startovací šablona pro webovou aplikaci v Reactu. Vytvořeno pomocí
-          <a href="https://www.npmjs.com/package/create-czechitas-app">create-czechitas-app</a>
-          .
-        </p>
-      </main>
-      <footer>
-        <p>Czechitas, Digitální akademie: Web</p>
-      </footer>
+    <div className="color-panel">
+      <h1>Mixér barev</h1>
+      <div className="sliders">
+        <ColorSlider baseColor="red" colorName="Červená" onValueChange={(value) => setRedValue(value)} />
+        <ColorSlider baseColor="green" colorName="Zelená" onValueChange={(value) => setGreenValue(value)} />
+        <ColorSlider baseColor="blue" colorName="Modrá" onValueChange={(value) => setBlueValue(value)} />
+      </div>
+      <div className="color-box" style={{ backgroundColor: color }} id="color-box"></div>
     </div>
   );
 };
